@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <title>Computer Accounting</title>
+    <meta charset="utf-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" th:href ="@{/css/main.css}"/>
+    <link rel="stylesheet" th:href ="@{/css/list.css}"/>
+    <link rel="stylesheet" th:href ="@{/css/search.css}"/>
+    <link rel="stylesheet" th:href="@{/css/computerList.css}">
+    <link href="https://use.fontawesome.com/releases/v5.0.1/css/all.css" rel="stylesheet">
+</head>
+<body class="homepage is-preload">
+<div id="page-wrapper">
+
+    <!-- Header -->
+    <section id="header">
+        <div class="container">
+
+            <!-- Logo -->
+            <h1 id="logo"><a href="buildingList.html">Computer Accounting</a></h1>
+
+            <!-- Nav -->
+            <nav id="nav">
+                <ul>
+                    <li><a class="icon solid fa-home" href="/building-list"><span>Головна</span></a></li>
+                    <li>
+                        <a href="/building-list" class="icon solid fa-arrow-left"><span>Повернутися</span></a>
+                    </li>
+                    <li><a class="icon solid fa-cog" href="left-sidebar.html"><span>Left Sidebar</span></a></li>
+                    <li><a class="icon solid fa-retweet" href="right-sidebar.html"><span>Right Sidebar</span></a></li>
+                    <li><a class="icon solid fa-sitemap" href="no-sidebar.html"><span>No Sidebar</span></a></li>
+                </ul>
+                <div class="d5">
+                    <form method="get" action="search">
+                        <input type="text" name="keyword" placeholder="Шукати тут...">
+                        <button type="submit" value="Search"></button>
+                    </form>
+                </div>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section id="main">
+        <div class="container">
+            <header>
+                <h2>Список будівель з доступними комп'ютерними класами:</h2>
+            </header>
+                    <!-- Feature -->
+                    <section>
+                        <ul class="menu" th:each="building : ${buildings}">
+                            <li th:text="${building.buildingName}"></li>
+                            <li><span>Місце розташування:</span><em th:text="${building.location}"></em></li>
+                            <li><span>Доступні кабінети:</span></li>
+                            <li><span th:block th:each="room:${building.rooms}"><a th:href="@{/room-list/{id}(id=${room.idRoom})}" th:text="${room.roomName}" class="button icon solid" style="font-size: 14px"></a>
+                            </span></li>
+                        </ul>
+                    </section>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <section id="footer">
+        <div class="container">
+            <ul class="links">
+                <li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+            </ul>
+        </div>
+    </section>
+
+</div>
+<!-- Scripts -->
+
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/jquery.dropotron.min.js}"></script>
+<script th:src="@{/js/browser.min.js}"></script>
+<script th:src="@{/js/breakpoints.min.js}"></script>
+<script th:src="@{/js/util.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+<script th:src="@{/js/list.js}"></script>
+<script th:src="@{/js/selectB.js}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+</body>
+</html>

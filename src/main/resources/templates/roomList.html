@@ -1,0 +1,111 @@
+<!DOCTYPE HTML>
+<!--
+	Strongly Typed by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="en">
+<html>
+<head>
+    <title>Computer List</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" th:href="@{/css/op.css}" />
+    <link rel="stylesheet" th:href="@{/css/computerList.css}">
+    <link rel="stylesheet" th:href="@{/css/search.css}">
+    <link href="https://use.fontawesome.com/releases/v5.0.1/css/all.css" rel="stylesheet">
+
+</head>
+<body class="homepage is-preload">
+<div id="page-wrapper">
+
+    <!-- Header -->
+    <section id="header">
+        <div class="container">
+
+            <!-- Nav -->
+            <nav id="nav">
+                <ul>
+                    <li><a class="icon solid fa-home" href="/building-list"><span>Головна</span></a></li>
+                    <li>
+                        <a href="/building-list" class="icon solid fa-arrow-left"><span>Повернутися</span></a>
+                    </li>
+                    <li><a class="icon solid fa-cog" href="left-sidebar.html"><span>Left Sidebar</span></a></li>
+                    <li><a class="icon solid fa-retweet" href="right-sidebar.html"><span>Right Sidebar</span></a></li>
+                    <li><a class="icon solid fa-sitemap" href="no-sidebar.html"><span>No Sidebar</span></a></li>
+                </ul>
+            </nav>
+            <div class="d5">
+                <form method="get" action="search">
+                    <input type="text" name="keyword" placeholder="Шукати тут...">
+                    <button type="submit" value="Search"></button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features">
+        <div class="container">
+            <header>
+                <h2>Доступні комп'ютери в кабінеті: </h2>
+                <h2 th:text="${room.roomName}"></h2>
+            </header>
+            <div class="row aln-center">
+                <div class="col-4 col-6-medium col-12-small">
+                    <!-- Feature -->
+                    <section>
+                        <ul class="menu">
+                            <li>Комп'ютери:</li>
+                            <li th:each="computer:${room.computers}"><a th:href="@{/computer-list/{id}(id=${computer.idComputer})}"><span th:text="${computer.computerNameInLocalNetwork}"></span></a></li>
+                        </ul>
+                    </section>
+                </div>
+                <div class="col-6 col-8-medium col-12-small">
+                    <!-- Feature -->
+                    <section>
+                        <ul class="menu">
+                            <li>Список оргтехніки в кабінеті:</li>
+                            <li><span>
+                                <table>
+                              <tr style="background: #b5e6cf">
+                                <th>Назва</th>
+                                <th>Тип</th>
+                                <th>Гарантійний талон</th>
+                              </tr>
+                                    <tr th:each="officeE:${room.officeEquipments}">
+                                        <td th:text="${officeE.sampleName}"></td>
+                                        <td th:text="${officeE.typeOfTheOfficeEquipment.nameTypeOfficeEquipment}"></td>
+                                        <td th:text="${officeE.warrantyCard}"></td>
+                                    </tr>
+                            </table>
+                            </span></li>
+                        </ul>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <section id="footer">
+        <div class="container">
+            <ul class="links">
+                <li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+            </ul>
+        </div>
+    </section>
+
+</div>
+
+<!-- Scripts -->
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/jquery.dropotron.min.js}"></script>
+<script th:src="@{/js/browser.min.js}"></script>
+<script th:src="@{/js/breakpoints.min.js}"></script>
+<script th:src="@{/js/util.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+<script th:src="@{/js/list.js}"></script>
+
+</body>
+</html>

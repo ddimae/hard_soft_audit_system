@@ -1,0 +1,126 @@
+<!DOCTYPE HTML>
+<!--
+	Strongly Typed by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>No Sidebar - Strongly Typed by HTML5 UP</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" th:href="@{/css/op.css}" />
+    <link rel="stylesheet" th:href="@{/css/computerList.css}">
+    <link rel="stylesheet" th:href="@{/css/search.css}">
+</head>
+<body class="no-sidebar is-preload">
+<div id="page-wrapper">
+
+    <!-- Header -->
+    <section id="header">
+        <div class="container">
+
+            <!-- Nav -->
+            <nav id="nav">
+                <ul>
+                    <li><a class="icon solid fa-home" href="/building-list"><span>Головна</span></a></li>
+                    <li>
+                        <a th:href="@{/room-list/{id}(id=${computer.room.idRoom})}" class="icon solid fa-arrow-left"><span>Повернутися назад</span></a>
+                    </li>
+                    <li><a class="icon solid fa-cog" href="left-sidebar.html"><span>Left Sidebar</span></a></li>
+                    <li><a class="icon solid fa-retweet" href="right-sidebar.html"><span>Right Sidebar</span></a></li>
+                    <li><a class="icon solid fa-sitemap" href="no-sidebar.html"><span>No Sidebar</span></a></li>
+                </ul>
+            </nav>
+            <div class="d5">
+                <form method="get" action="search">
+                    <input type="text" name="keyword" placeholder="Шукати тут...">
+                    <button type="submit" value="Search"></button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main -->
+    <section id="main">
+        <div class="container">
+            <div id="content">
+                <ul class="menu">
+                    <li>Інформація про ПК:</li>
+                    <li><span>Ім'я в мережі:</span><em th:text="${computer.computerNameInLocalNetwork}"></em></li>
+                    <li><span>Оперційні системи:</span><em>Пріоритет:</em></li>
+                    <li th:each="computerOS:${computer.computerOS}"><span th:text="${computerOS.operationSystem.typeOSname}"></span><em th:text="${computerOS.priorityOS}"></em></li>
+                </ul>
+                <ul class="menu">
+                    <li>Список ПЗ:</li>
+                    <li><span>
+                        <table class="table_col">
+                              <tr style="background: #b5e6cf">
+                                <th>Назва програми</th>
+                                <th>Місце установки програми</th>
+                                <th>Розмір програми(GB)</th>
+                                <th>Дата інсталяції</th>
+                                  <th>Фахівець-встановник: Ім'я</th>
+                                  <th>Фахівець-встановник: Прізвище</th>
+                                  <th>Редагувати</th>
+                                  <th>Видалити</th>
+                                </tr>
+                            <tr th:each="computerSI:${computer.softwareInstallations}">
+                                <td th:text="${computerSI.program.programName}"></td>
+                                <td th:text="${computerSI.program.installationLocation}"></td>
+                                <td th:text="${computerSI.programSize}"></td>
+                                <td th:text="${computerSI.dateOfInstallation}"></td>
+                                <td th:text="${computerSI.specialists.name}"></td>
+                                <td th:text="${computerSI.specialists.surname}"></td>
+                                <td><a style="color: #800000" th:href="@{/softwareInstallation-update/{id}(id=${computerSI.softwareInstallationId})}">Редагувати</a></td>
+                                <td><a style="color: #800000" th:href="@{/computerList/{computerID}/softwareInstallation-delete/{id}(id=${computerSI.softwareInstallationId}, computerID = ${computer.idComputer})}">Видалити</a></td>
+                            </tr>
+                            </table>
+                    </span>
+                    </li>
+                    <li><span><a th:href="@{/softwareInstallation-create/{id}(id=${computer.idComputer})}" class="button icon solid fa-redo">Додати</a></span></li>
+                </ul>
+                <ul class="menu">
+                    <li>Список Периферії:</li>
+                    <li><span>
+                        <table class="table_col">
+                              <tr style="background: #b5e6cf">
+                                <th>Серійний номер</th>
+                                <th>Модель</th>
+                                <th>Тип обладнання</th>
+                                </tr>
+                              <tr th:each="computerEquipment:${computer.computerEquipments}">
+                                <td th:text="${computerEquipment.PeripheralEquipment.serialNumberOfTheEquipment}"></td>
+                                <td th:text="${computerEquipment.PeripheralEquipment.modelOfEquipment}"></td>
+                                <td th:text="${computerEquipment.PeripheralEquipment.TypeOfPeripheralEquipment.nameTypePeripheralEquipment}"></td>
+                                </tr>
+                            </table>
+                    </span>
+                    </li>
+                </ul>
+                <a th:href="@{/export/{id}(id=${computer.idComputer})}" class="button icon solid fa-download">Зберегти</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <section id="footer">
+        <div class="container">
+            <ul class="links">
+                <li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+            </ul>
+        </div>
+    </section>
+
+</div>
+
+<!-- Scripts -->
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/jquery.dropotron.min.js}"></script>
+<script th:src="@{/js/browser.min.js}"></script>
+<script th:src="@{/js/breakpoints.min.js}"></script>
+<script th:src="@{/js/util.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+
+</body>
+</html>
